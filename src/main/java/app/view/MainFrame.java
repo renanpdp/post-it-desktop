@@ -117,6 +117,9 @@ public class MainFrame extends JFrame {
 		postItsPanel.setLayout(null);
 
 		createPostItButton.setText("Novo post-it");
+		if (users.isEmpty()) {
+			createPostItButton.setEnabled(false);
+		}
 		createPostItButton.setIcon(new ImageIcon(ResourcesUtil.getImage("note_add.png")));
 		createPostItButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -132,10 +135,10 @@ public class MainFrame extends JFrame {
 		postItsScrollPane.setViewportView(postItsInsidePanel);
 
 		postItsPanel.add(postItsScrollPane);
-		postItsScrollPane.setBounds(10, 50, 658, 435);
+		postItsScrollPane.setBounds(10, 50, 658, 650);
 
 		this.getContentPane().add(postItsPanel);
-		postItsPanel.setBounds(0, 100, 678, 495);
+		postItsPanel.setBounds(0, 100, 678, 710);
 
 		mainPanel.setLayout(null);
 
@@ -189,7 +192,7 @@ public class MainFrame extends JFrame {
 		
 		this.setIconImage(ResourcesUtil.getImage("note.png"));
 		this.setTitle("Post-its");
-		this.setSize(685, 623);
+		this.setSize(685, 838);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -265,6 +268,12 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void refreshUsersCombo(final Object object) {
+		if (users.isEmpty()) {
+			createPostItButton.setEnabled(false);
+		} else {
+			createPostItButton.setEnabled(true);
+		}
+	
 		comboItems = new Object[users.size()+1];
 		comboItems[0] = "Todos";
 		int i=1;
